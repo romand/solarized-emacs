@@ -154,8 +154,8 @@ Alpha should be a float between 0 and 1."
          ;; Solarized accented colors
          (yellow    "#b58900")
          (orange    "#cb4b16")
-         (red       "#dc322f")
-         (magenta   "#d33682")
+         (red       "#b83b3a")
+         (magenta   "#a34e77")
          (violet    "#6c71c4")
          (blue      "#268bd2")
          (cyan      "#2aa198")
@@ -423,7 +423,7 @@ customize the resulting theme."
                                 :box (:line-width 2 :color ,s-header-line-bg
                                                   :style unspecified)
                                 ))))
-     `(region ((,class (:foreground ,base03 :background ,base1))))
+     `(region ((,class (:background ,base02))))
      `(secondary-selection ((,class (:background ,base02))))
 
      `(trailing-whitespace ((,class (:background ,red))))
@@ -614,25 +614,27 @@ customize the resulting theme."
      `(custom-button-unraised ((,class (:inherit underline))))
      `(custom-button-pressed-unraised ((,class (:inherit custom-button-unraised :foreground ,magenta))))
 ;;;;; diff
-     `(diff-added   ((,class (:foreground ,green))))
-     `(diff-changed ((,class (:foreground ,blue))))
-     `(diff-removed ((,class (:foreground ,red))))
+     `(diff-context
+       ((,class (:background ,(solarized-color-blend base02 base03 0.50)))))
+
+     `(diff-added
+       ((,class (:foreground ,(solarized-color-blend green-l base0 0.50)))))
      `(diff-refine-added
-       ((((class color) (background light))
-         (:background ,(solarized-color-blend "#ddffdd" green 0.7)))
-        (((class color) (background dark))
-         (:background ,(solarized-color-blend "#446644" green 0.7)))))
-     `(diff-refine-changed
-       ((((class color) (background light))
-         (:background ,(solarized-color-blend "#ddddff" blue 0.7)))
-        (((class color) (background dark))
-         (:background ,(solarized-color-blend "#444466" blue 0.7)))))
+       ((,class (:foreground ,(solarized-color-blend green-l base0 0.70)
+                 :background ,(solarized-color-blend green base02 0.05)))))
+
+     `(diff-removed
+       ((,class (:foreground ,(solarized-color-blend red base1 0.55)))))
      `(diff-refine-removed
-       ((((class color) (background light))
-         (:background ,(solarized-color-blend "#ffdddd" red 0.7)))
-        (((class color) (background dark))
-         (:background ,(solarized-color-blend "#664444" red 0.7)))))
-     `(diff-header  ((,class (:background ,base03))))
+       ((,class (:foreground ,(solarized-color-blend red-l base0 0.80)
+                 :background ,(solarized-color-blend red base02 0.07)))))
+
+     `(diff-changed ((,class (:foreground ,blue-d :background nil))))
+     `(diff-refine-change ((,class (:foreground ,blue :background ,base03
+                                                :inverse-video t))))
+
+     `(diff-header ((,class (:background ,base03))))
+
      `(diff-file-header
        ((,class (:background ,base03 :foreground ,base0 :weight bold))))
 ;;;;; ediff
@@ -1338,6 +1340,24 @@ customize the resulting theme."
      `(magit-diff-context-highlight      ((t (:background ,base02))))
      `(magit-diffstat-added              ((t (:foreground ,green))))
      `(magit-diffstat-removed            ((t (:foreground ,red))))
+
+     `(magit-diff-removed-highlight
+       ((t (:foreground ,(solarized-color-blend red-l base0 0.80)
+            :background ,(solarized-color-blend red base02 0.07)))))
+     `(magit-diff-removed
+       ((t (:foreground ,(solarized-color-blend red base1 0.55)))))
+
+     `(magit-diff-added-highlight
+       ((t (:foreground ,(solarized-color-blend green-l base0 0.70)
+            :background ,(solarized-color-blend green base02 0.05)))))
+     `(magit-diff-added
+       ((t (:foreground ,(solarized-color-blend green-l base0 0.50)))))
+     ;; `(magit-diff-removed-hightlight
+     ;;   ((t (:foreground ,(solarized-color-blend red-l base0 0.80)
+     ;;        :background ,(solarized-color-blend red base02 0.07)))))
+     ;; `(magit-diff-added-hightlight
+     ;;   ((t (:foreground ,(solarized-color-blend green-l base0 0.70)
+     ;;        :background ,(solarized-color-blend green base02 0.05)))))
 ;;;;;; popup
      `(magit-popup-heading             ((t (:foreground ,yellow  :weight bold))))
      `(magit-popup-key                 ((t (:foreground ,base1   :weight bold))))
